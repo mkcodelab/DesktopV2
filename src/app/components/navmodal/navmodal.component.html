@@ -1,0 +1,7 @@
+<div class="flex flex-justify-between bg-col-3">
+  <p>Menu</p>
+  <button class="btn bg-col-1" (click)="closeNav()"><<</button>
+</div>
+<div class="flex-column">
+  <div class="bg-col-3 b-b m-t p-a cursor-pointer slide-right" *ngFor="let item of navItems" (click)="itemClicked(item)">{{item.name}}</div>
+</div>
