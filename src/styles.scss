@@ -1,14 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 $colGrayLight: #999;
 $colGrayMedium: #666;
 $colGrayDark: #333;
 $halfTransparent: rgba(0,0,0,.5);
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: helvetica
-}
+// * {
+//   margin: 0;
+//   padding: 0;
+//   box-sizing: border-box;
+//   // font-family: helvetica
+// }
 body {
   background-color: $colGrayLight;
 }

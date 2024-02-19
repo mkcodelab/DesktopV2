@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { UsernamesComponent } from '../usernames/usernames.component';
+import { TasksComponent } from '../tasks/tasks.component';
+import { NgIf } from '@angular/common';
 
 @Component({
   standalone: true,
-  imports: [UsernamesComponent],
+  imports: [NgIf, UsernamesComponent, TasksComponent],
   selector: 'central-modal',
   templateUrl: './central-modal.component.html',
   styleUrls: ['./central-modal.component.scss']
@@ -12,6 +14,8 @@ import { UsernamesComponent } from '../usernames/usernames.component';
 export class CentralModalComponent implements OnInit {
 
   app: AppComponent
+
+  showUsernames = false
 
   constructor(app: AppComponent) {
     this.app = app;
@@ -21,6 +25,10 @@ export class CentralModalComponent implements OnInit {
   }
 
   closeModal(){
-    this.app.centralModalOpened = false;
+    this.app.taskModalOpened = false;
+  }
+
+  toggleShowUsernames() {
+    this.showUsernames = !this.showUsernames;
   }
 }

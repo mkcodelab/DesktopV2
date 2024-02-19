@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { CommonModule } from '@angular/common';
 
@@ -21,6 +21,8 @@ export class NavmodalComponent implements OnInit {
   app: AppComponent;
 
   navItems: NavItem[] = [];
+
+  // @Output() 
   
   ngOnInit(): void {
     this.populateNav(9);
@@ -45,7 +47,15 @@ export class NavmodalComponent implements OnInit {
 
   }
 
+  // change those for signals / observables
+
   openCentralModal(modal: string){
     this.app.openCentralModal(modal)
   }
+
+  openMovableWindow(windowName: string) {
+    this.app.openMovableWindow(windowName)
+  }
+
+
 }

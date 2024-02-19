@@ -1,1 +1,7 @@
-<p>movable-window works!</p>
+<div class="bg-stone-200">
+  <div class="topbar bg-slate-500 cursor-pointer" (mousedown)="dragStart($event)" (mouseup)="isMoving = false" (mousemove)="updatePosition($event)">
+    <button class="p-1" (click)="close.emit()">X</button>
+  </div>
+
+  <ng-content></ng-content>
+</div>
