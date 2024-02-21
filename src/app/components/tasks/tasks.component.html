@@ -1,8 +1,16 @@
-<div class="bg-amber-200">
+<div>
   <h1 class="text-center p-2">Task List</h1>
 
   <div class="p-2 text-center">
-    <input #taskInput type="text" />
+    <input
+      #taskInput
+      type="text"
+      (keyup.enter)="
+        listState.state === 'success' &&
+          addTask(taskInput.value, listState.results);
+        taskInput.value = ''
+      "
+    />
     <button
       class="bg-slate-500"
       (click)="
@@ -16,12 +24,10 @@
   </div>
 
   <div class="p-2" *ngIf="listState.state === 'success'">
-     
     <button
-      class="p-2 bg-slate-500/25 mt-2 flex justify-between w-full"
-      [ngClass]="{ 'bg-lime-500/70' : task.done }"
+      class="p-2 mt-2 flex justify-between w-full"
+      [ngClass]="task.done ? 'bg-lime-500/50' : 'bg-slate-500/25'"
       *ngFor="let task of listState.results"
-      (click)="!task.isEditMode && toggleDoneState(task.id)"
       (dblclick)="editTask(task.id)"
     >
       <p [class.line-through]="task.done" *ngIf="!task.isEditMode">
@@ -31,7 +37,7 @@
       <div *ngIf="task.isEditMode">
         <input #taskEditInput type="text" [value]="task.name" />
         <button
-          class="bg-slate-500/25 p-1 mr-1"
+          class="bg-slate-500/25 p-1 ml-1 mr-1"
           (click)="
             updateTask(task.id, { name: taskEditInput.value, done: task.done })
           "
@@ -44,10 +50,20 @@
       </div>
 
       <div>
-        <button class="bg-slate-500/25 p-1" (click)="deleteTask(task.id)">
-          delete
+        <button
+          class="bg-slate-500/25 p-1 mr-1 w-8 h-8 rounded"
+          [ngClass]="task.done ? 'text-green-500' : 'text-red-500'"
+          (click)="toggleDoneState(task.id)"
+        >
+          &check;
         </button>
-        <p [title]="task.createdAt | customDate">created:</p>
+        <button
+          class="bg-slate-500/25 p-1 w-8 h-8 rounded"
+          (click)="deleteTask(task.id)"
+        >
+          &cross;
+        </button>
+        <p>{{ task.createdAt | customDate }}</p>
       </div>
     </button>
   </div>

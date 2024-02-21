@@ -7,6 +7,7 @@ import { NavmodalComponent } from './components/navmodal/navmodal.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { MovableWindowComponent } from './components/movable-window/movable-window.component';
+import { ClickOutsideDirective } from './directives/clickOutside.directive';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ import { MovableWindowComponent } from './components/movable-window/movable-wind
     CentralBottomPanelComponent,
     NavmodalComponent,
     TasksComponent,
-    MovableWindowComponent
+    MovableWindowComponent,
+    ClickOutsideDirective
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

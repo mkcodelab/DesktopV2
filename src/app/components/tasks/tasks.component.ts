@@ -8,8 +8,8 @@ export type Task = {
   id: number;
   name: string;
   done: boolean;
-  isEditMode: boolean
-  createdAt: Date
+  isEditMode: boolean;
+  createdAt: Date;
 };
 
 @Component({
@@ -26,30 +26,47 @@ export class TasksComponent implements OnInit {
   // constructor(private taskService: TaskService) {}
 
   listState: TaskListState<Task> = { state: 'idle' };
-  
+
   ngOnInit() {
     this.listState = { state: 'loading' };
-    this.getAll()
-    
+    this.getAll();
   }
 
   getAll() {
-    this.taskService.getAll().then((response) => {
-      if (Array.isArray(response)) {
+    // this.taskService.getAll().then((response) => {
+    //   if (Array.isArray(response)) {
+    //     this.listState = { state: 'success', results: response };
+    //   } else {
+    //     this.listState = { state: 'error', error: response };
+    //   }
+    // });
+
+    this.taskService.getAll().subscribe({
+      next: (response) => {
         this.listState = { state: 'success', results: response };
-      } else {
-        this.listState = { state: 'error', error: response };
-      }
+      },
+      error: (err) => {
+        this.listState = { state: 'error', error: err };
+      },
     });
+    // .subscribe((response)=> {
+    //   if (Array.isArray(response)) {
+    //         this.listState = { state: 'success', results: response };
+    //       } else {
+    //         this.listState = { state: 'error', error: response };
+    //       }
+    // })
   }
 
   editTask(taskId: number) {
-    this.toggleTaskEdit(taskId, true)
+    this.toggleTaskEdit(taskId, true);
   }
 
   toggleTaskEdit(taskId: number, to: boolean) {
-    if(this.listState.state === 'success') {
-      let taskToEdit = this.listState.results.find( task => task.id === taskId)
+    if (this.listState.state === 'success') {
+      let taskToEdit = this.listState.results.find(
+        (task) => task.id === taskId
+      );
 
       if (taskToEdit) {
         if (to) {
@@ -62,49 +79,83 @@ export class TasksComponent implements OnInit {
   }
 
   addTask(name: string, tasks: Task[]) {
-    this.taskService.add(name).then((response) => {
-      if ('id' in response) {
+    this.taskService.add(name).subscribe({
+      next: (response: any) => {
         this.listState = {
           state: 'success',
           results: tasks.concat(response),
         };
-      } else {
-        alert(response.message);
+      },
+      error: (err) => {
+        alert(err.message);
+      },
+    });
+    // this.taskService.add(name).then((response) => {
+    //   if ('id' in response) {
+    //     this.listState = {
+    //       state: 'success',
+    //       results: tasks.concat(response),
+    //     };
+    //   } else {
+    //     alert(response.message);
+    //   }
+    // });
+  }
+
+  deleteTask(taskId: number) {
+    // this.taskService.delete(taskId).then(() => {
+    //   this.getAll()
+    // })
+    this.taskService.delete(taskId).subscribe(() => {
+      // this.getAll()
+      if (this.listState.state === 'success') {
+        this.listState.results = this.listState.results.filter((task) => {
+          return task.id !== taskId;
+        });
       }
     });
   }
 
-  deleteTask(taskId: number) {
-    this.taskService.delete(taskId).then(() => {
-      this.getAll()
-    })
-    
-  }
-
+  // FIX THIS
   updateTask(taskId: number, payload: TaskUpdatePayload) {
-    this.taskService.update(taskId, payload).then(() => {
-     
-      this.toggleTaskEdit(taskId, false)
-      this.getAll()
+    // this.taskService.update(taskId, payload).then(() => {
 
-    })
+    //   this.toggleTaskEdit(taskId, false)
+    //   setTimeout(()=>{
+    //     this.getAll()
+    //   }, 200)
+
+    // })
+
+    this.taskService.update(taskId, payload).subscribe(() => {
+      this.toggleTaskEdit(taskId, false);
+      setTimeout(() => {
+        this.getAll();
+        console.log('test', payload);
+      }, 200);
+      // if (this.listState.state === 'success') {
+      //   this.listState.results = this.listState.results.map((task)=>{
+      //     return task.id === taskId
+      //   })
+      // }
+    });
   }
 
   cancelUpdate(taskId: number) {
-    this.toggleTaskEdit(taskId, false)
+    this.toggleTaskEdit(taskId, false);
   }
 
   toggleDoneState(taskId: number) {
-    if (this.listState.state === 'success'){
-      let taskToEdit = this.listState.results.find( task => task.id === taskId)
+    if (this.listState.state === 'success') {
+      let taskToEdit = this.listState.results.find(
+        (task) => task.id === taskId
+      );
       if (taskToEdit !== undefined) {
         // update the view
-        taskToEdit.done = !taskToEdit.done
+        taskToEdit.done = !taskToEdit.done;
         // send update to backend
-        this.taskService.update(taskId, {done: taskToEdit.done})
+        this.taskService.update(taskId, { done: taskToEdit.done }).subscribe();
       }
-      
     }
   }
-
 }

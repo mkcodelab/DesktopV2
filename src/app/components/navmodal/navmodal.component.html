@@ -1,8 +1,24 @@
-<div class="flex flex-justify-between bg-col-3">
-  <p>Menu</p>
-  <button class="btn bg-col-1" (click)="closeNav()"><<</button>
-</div>
-<div class="flex-column">
-  <button class="bg-col-3 b-b m-t p-a cursor-pointer slide-right" (click)="openCentralModal('tasks-modal')">Tasks</button>
-  <button class="bg-col-3 b-b m-t p-a cursor-pointer slide-right" (click)="openMovableWindow('movable-window')">Movable Window</button>
+<div class="flex flex-col justify-between">
+  <div class="flex flex-justify-between bg-col-3">
+    <p class="p-1 text-xl">Menu</p>
+    <button class="btn bg-col-1 text-white" (click)="closeNav()">&Larr;</button>
+  </div>
+  <div class="flex-column">
+    <button
+      class="bg-col-3 b-b m-t p-a cursor-pointer slide-right"
+      (click)="openCentralModal('tasks-modal')"
+    >
+      Tasks
+    </button>
+    <button
+      class="bg-col-3 b-b m-t p-a cursor-pointer slide-right"
+      (click)="openMovableWindow('movable-window')"
+    >
+      Movable Window
+    </button>
+  </div>
+
+  <div class="bg-slate-500/25">
+    <button class="bg-slate-500/25 p-1">options</button>
+  </div>
 </div>

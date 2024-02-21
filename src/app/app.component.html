@@ -6,21 +6,27 @@
 ></navmodal>
 
 <button
-  class="btn bg-col-1"
+  class="btn bg-col-1 text-white"
   (click)="openNavModal()"
   [ngClass]="{ invisible: navOpened }"
 >
-  >>
+  &Rarr;
 </button>
 
-<central-modal class="central-modal rounded-xl shadow-lg bg-stone-200" *ngIf="taskModalOpened">
-  <tasks/>
+<central-modal
+  class="central-modal rounded-xl shadow-lg bg-stone-200"
+  *ngIf="taskModalOpened"
+>
+  <tasks />
 </central-modal>
 
-<movable-window class="absolute w-6/12" style="top: 0; left: 0" *ngIf="movableWindowOpened" (close)="movableWindowOpened = false">
+<movable-window
+  class="absolute w-6/12"
+  style="top: 0; left: 0"
+  *ngIf="movableWindowOpened"
+  (close)="movableWindowOpened = false"
+>
   test
 </movable-window>
-
-
 
 <central-bottom-panel class="pos-fixed bottom center"></central-bottom-panel>
