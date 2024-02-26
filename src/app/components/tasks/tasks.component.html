@@ -1,8 +1,9 @@
 <div>
-  <h1 class="text-center p-2">Task List</h1>
+  <h1 class="text-center p-2 text-slate-500 text-lg font-bold">Task List</h1>
 
   <div class="p-2 text-center">
     <input
+      class="h-8 rounded border-slate-500 border-2"
       #taskInput
       type="text"
       (keyup.enter)="
@@ -12,14 +13,14 @@
       "
     />
     <button
-      class="bg-slate-500"
+      class="bg-slate-500 w-8 h-8 rounded ml-2 text-white"
       (click)="
         listState.state === 'success' &&
           addTask(taskInput.value, listState.results);
         taskInput.value = ''
       "
     >
-      Add task
+      +
     </button>
   </div>
 

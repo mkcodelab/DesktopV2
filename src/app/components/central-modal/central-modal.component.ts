@@ -9,23 +9,21 @@ import { NgIf } from '@angular/common';
   imports: [NgIf, UsernamesComponent, TasksComponent],
   selector: 'central-modal',
   templateUrl: './central-modal.component.html',
-  styleUrls: ['./central-modal.component.scss']
+  styleUrls: ['./central-modal.component.scss'],
 })
 export class CentralModalComponent implements OnInit {
+  app: AppComponent;
 
-  app: AppComponent
-
-  showUsernames = false
+  showUsernames = false;
 
   constructor(app: AppComponent) {
     this.app = app;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  closeModal(){
-    this.app.taskModalOpened = false;
+  closeModal() {
+    this.app.closeCentralModal('tasks-modal');
   }
 
   toggleShowUsernames() {

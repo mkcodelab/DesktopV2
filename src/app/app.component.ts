@@ -21,47 +21,55 @@ import { ClickOutsideDirective } from './directives/clickOutside.directive';
     NavmodalComponent,
     TasksComponent,
     MovableWindowComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  providers: [HttpClient]
+  providers: [HttpClient],
 })
 export class AppComponent {
   title = 'desktopV2';
 
-  navOpened: boolean = false;
-  canCloseModal: boolean = false;
+  protected navOpened: boolean = false;
+  protected canCloseModal: boolean = false;
 
-  taskModalOpened: boolean = false;
-  
-  movableWindowOpened = false
+  protected taskModalOpened: boolean = false;
+
+  protected movableWindowOpened = false;
 
   openCentralModal(modal: string) {
-    switch(modal) {
+    switch (modal) {
       case 'tasks-modal':
         this.taskModalOpened = true;
-        console.log(modal);
         break;
       default:
-        console.log('Sorry, no modal with that name')
+        console.error('Sorry, no modal with that name');
     }
-      
+  }
+
+  closeCentralModal(modal: string) {
+    switch (modal) {
+      case 'tasks-modal':
+        this.taskModalOpened = false;
+        break;
+      default:
+        console.error('Sorry, no modal with that name');
+    }
   }
 
   openMovableWindow(windowName: string) {
-    switch(windowName){
+    switch (windowName) {
       case 'movable-window':
-        this.movableWindowOpened = true
+        this.movableWindowOpened = true;
         break;
       default:
-        console.log('sorry, no window found')
+        console.log('sorry, no window found');
     }
   }
 
   openNavModal() {
     this.navOpened = true;
-    setTimeout(() => (this.canCloseModal = true), 500);
+    setTimeout(() => (this.canCloseModal = true), 300);
   }
 
   closeNavModal() {

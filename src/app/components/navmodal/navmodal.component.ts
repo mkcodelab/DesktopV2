@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { CommonModule } from '@angular/common';
 
@@ -11,51 +11,30 @@ interface NavItem {
   imports: [CommonModule],
   selector: 'navmodal',
   templateUrl: './navmodal.component.html',
-  styleUrls: ['./navmodal.component.scss']
+  styleUrls: ['./navmodal.component.scss'],
 })
-export class NavmodalComponent implements OnInit {
-
+export class NavmodalComponent {
   constructor(app: AppComponent) {
     this.app = app;
   }
   app: AppComponent;
 
-  navItems: NavItem[] = [];
-
-  // @Output() 
-  
-  ngOnInit(): void {
-    this.populateNav(9);
-  }
-
   closeNav() {
-    if (this.app.navOpened == true) {
-      this.app.navOpened = false;
-    }
-  }
-
-  populateNav(count : number) {
-    for (let i = 0; i < count; i++) {
-      const item = {name: `item ${i}`}
-      this.navItems.push(item)
-    }
+    this.app.closeNavModal();
   }
 
   itemClicked(item: NavItem) {
-    console.log(item)
-    this.openCentralModal('test')
-
+    console.log(item);
+    this.openCentralModal('test');
   }
 
   // change those for signals / observables
 
-  openCentralModal(modal: string){
-    this.app.openCentralModal(modal)
+  openCentralModal(modal: string) {
+    this.app.openCentralModal(modal);
   }
 
   openMovableWindow(windowName: string) {
-    this.app.openMovableWindow(windowName)
+    this.app.openMovableWindow(windowName);
   }
-
-
 }
