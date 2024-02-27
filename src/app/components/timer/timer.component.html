@@ -1,1 +1,20 @@
-<div class="timer">{{ time | async }}</div>
+<div class="flex flex-col content-evenly">
+  <div
+    (click)="toggleTimerMenu()"
+    class="timer text-center cursor-pointer"
+    [style.textShadow]="'0px 0px 5px #' + timerColor"
+  >
+    {{ time | async }}
+  </div>
+  <div *ngIf="timerMenuOpened">
+    <button
+      class="w-6 h-6 text-white rounded-lg"
+      [ngClass]="{ 'mr-2': !isLast }"
+      [style.backgroundColor]="'#' + color"
+      *ngFor="let color of timerColorPallete; last as isLast"
+      (click)="setTimerColor(color)"
+    >
+      &check;
+    </button>
+  </div>
+</div>

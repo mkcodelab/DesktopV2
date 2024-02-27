@@ -1,20 +1,38 @@
-import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { AsyncPipe, NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, NgIf, NgFor, NgStyle, NgClass],
   selector: 'timer',
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.scss'],
 })
-export class TimerComponent {
-  constructor() {}
+export class TimerComponent implements OnInit {
+  protected localStorageService = inject(LocalStorageService);
+
+  protected timerColor: string | null = '';
+
+  protected timerColorPallete: string[] = [
+    '00ffff',
+    'ff00ff',
+    'ffff00',
+    'ff0000',
+    '00ff00',
+    '0000ff',
+  ];
+
+  protected timerMenuOpened = false;
 
   time = new Observable<string>((observer: Observer<string>) => {
     setInterval(() => observer.next(this.getTime()), 1000);
   });
+
+  ngOnInit(): void {
+    this.timerColor = this.getTimerColor();
+  }
 
   getTime() {
     let date = new Date();
@@ -22,9 +40,18 @@ export class TimerComponent {
     let m = date.getMinutes().toString().padStart(2, '0');
     let s = date.getSeconds().toString().padStart(2, '0');
     return `${h}:${m}:${s}`;
-    // const parts = [...document.querySelectorAll('#hour,#minute,#seconds')]
-    // setInterval(() => {
-    //  new Date().toTimeString().split(' ')[0].split(':').forEach( (part, i) => parts[i].textContent = part)
-    // }, 1000)
+  }
+
+  toggleTimerMenu() {
+    this.timerMenuOpened = !this.timerMenuOpened;
+  }
+
+  setTimerColor(color: string) {
+    this.timerColor = color;
+    this.localStorageService.setItem('timerColor', this.timerColor);
+  }
+
+  getTimerColor() {
+    return this.localStorageService.getItem('timerColor');
   }
 }
