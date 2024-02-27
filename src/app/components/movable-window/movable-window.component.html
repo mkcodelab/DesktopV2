@@ -1,5 +1,10 @@
-<div class="bg-stone-200">
-  <div class="topbar bg-slate-500 cursor-pointer" (mousedown)="dragStart($event)" (mouseup)="isMoving = false" (mousemove)="updatePosition($event)">
+<div class="bg-stone-200" [style.width.px]="size.w" [style.height.px]="size.h">
+  <div
+    class="topbar bg-slate-500 cursor-pointer"
+    (mousedown)="dragStart($event)"
+    (mouseup)="dragStop()"
+    (mousemove)="onMouseMove($event)"
+  >
     <button class="p-1" (click)="close.emit()">X</button>
   </div>
 

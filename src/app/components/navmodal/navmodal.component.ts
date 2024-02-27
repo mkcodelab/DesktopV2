@@ -11,7 +11,7 @@ interface NavItem {
   imports: [CommonModule],
   selector: 'navmodal',
   templateUrl: './navmodal.component.html',
-  styleUrls: ['./navmodal.component.scss'],
+  // styleUrls: ['./navmodal.component.scss'],
 })
 export class NavmodalComponent {
   constructor(app: AppComponent) {

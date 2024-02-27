@@ -15,6 +15,9 @@ $halfTransparent: rgba(0,0,0,.5);
 // }
 body {
   background-color: $colGrayLight;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 

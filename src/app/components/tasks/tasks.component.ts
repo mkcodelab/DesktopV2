@@ -17,7 +17,7 @@ export type Task = {
   standalone: true,
   imports: [NgFor, NgIf, NgClass, CustomDatePipe],
   templateUrl: './tasks.component.html',
-  styleUrl: './tasks.component.scss',
+  // styleUrl: './tasks.component.scss',
 })
 export class TasksComponent implements OnInit {
   // DI by inject
