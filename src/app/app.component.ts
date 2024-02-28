@@ -8,6 +8,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { MovableWindowComponent } from './components/movable-window/movable-window.component';
 import { ClickOutsideDirective } from './directives/clickOutside.directive';
+import { BackgroundComponent } from './components/background/background.component';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ import { ClickOutsideDirective } from './directives/clickOutside.directive';
     TasksComponent,
     MovableWindowComponent,
     ClickOutsideDirective,
+    BackgroundComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

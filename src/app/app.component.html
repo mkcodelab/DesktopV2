@@ -1,4 +1,4 @@
-<!-- <app-header></app-header> -->
+<background></background>
 <navmodal
   class="nav-modal"
   [ngClass]="{ 'nav-modal-open': navOpened }"
@@ -6,7 +6,7 @@
 ></navmodal>
 
 <button
-  class="btn bg-col-1 text-white"
+  class="btn bg-col-1 text-white z-10 absolute"
   (click)="openNavModal()"
   [ngClass]="{ invisible: navOpened }"
 >
