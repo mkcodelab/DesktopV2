@@ -1,20 +1,23 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SharedDataService } from '../../services/shared-data.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'test-component-b',
   standalone: true,
-  imports: [],
-  template: `<p>data from sharedDataService: {{ data }}</p>`,
+  imports: [AsyncPipe],
+  template: `<p>data from sharedDataService: {{ data | async }}</p>`,
 })
-export class TestComponentB implements OnInit {
+export class TestComponentB {
   sharedDataService = inject(SharedDataService);
 
-  data: string = '';
+  // data: string = '';
 
-  ngOnInit() {
-    this.sharedDataService.getData().subscribe((data) => {
-      this.data = data;
-    });
-  }
+  // ngOnInit() {
+  //   this.sharedDataService.getData().subscribe((data) => {
+  //     this.data = data;
+  //   });
+  // }
+
+  data = this.sharedDataService.getData();
 }
