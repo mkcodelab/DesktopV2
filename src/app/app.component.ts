@@ -9,6 +9,7 @@ import { TasksComponent } from './components/tasks/tasks.component';
 import { MovableWindowComponent } from './components/movable-window/movable-window.component';
 import { ClickOutsideDirective } from './directives/clickOutside.directive';
 import { BackgroundComponent } from './components/background/background.component';
+import { TestComponentB } from './components/test-component/test-componentB.component';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ import { BackgroundComponent } from './components/background/background.componen
     MovableWindowComponent,
     ClickOutsideDirective,
     BackgroundComponent,
+    TestComponentB,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

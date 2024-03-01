@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { CommonModule } from '@angular/common';
+import { TestComponentA } from '../test-component/test-componentA.component';
 
 interface NavItem {
   name: string;
@@ -8,7 +9,7 @@ interface NavItem {
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TestComponentA],
   selector: 'navmodal',
   templateUrl: './navmodal.component.html',
   // styleUrls: ['./navmodal.component.scss'],
