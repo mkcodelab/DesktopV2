@@ -14,11 +14,23 @@
 </button>
 
 <central-modal
+  [title]="'Tasks'"
+  [modalName]="'tasks-modal'"
   class="central-modal rounded-xl shadow-lg bg-stone-200"
   *ngIf="taskModalOpened"
 >
   <tasks />
 </central-modal>
+
+<!--  -->
+
+<central-modal
+  [title]="'Log In'"
+  [modalName]="'log-in-modal'"
+  class="central-modal rounded-xl shadow-lg bg-stone-200"
+  *ngIf="logInModalOpened"
+  ><log-in></log-in
+></central-modal>
 
 <movable-window
   class="absolute"
@@ -26,8 +38,6 @@
   *ngIf="movableWindowOpened"
   (close)="movableWindowOpened = false"
 >
-  test
-
   <test-component-b></test-component-b>
 </movable-window>
 

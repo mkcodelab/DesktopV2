@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { UsernamesComponent } from '../usernames/usernames.component';
 import { TasksComponent } from '../tasks/tasks.component';
@@ -12,18 +12,24 @@ import { NgIf } from '@angular/common';
   styleUrls: ['./central-modal.component.scss'],
 })
 export class CentralModalComponent implements OnInit {
-  app: AppComponent;
-
-  showUsernames = false;
-
   constructor(app: AppComponent) {
     this.app = app;
   }
 
+  app: AppComponent;
+
+  showUsernames = false;
+
+  @Input()
+  title = '';
+
+  @Input({ required: true })
+  modalName = '';
+
   ngOnInit(): void {}
 
   closeModal() {
-    this.app.closeCentralModal('tasks-modal');
+    this.app.closeCentralModal(this.modalName);
   }
 
   toggleShowUsernames() {

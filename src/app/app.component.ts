@@ -10,6 +10,7 @@ import { MovableWindowComponent } from './components/movable-window/movable-wind
 import { ClickOutsideDirective } from './directives/clickOutside.directive';
 import { BackgroundComponent } from './components/background/background.component';
 import { TestComponentB } from './components/test-component/test-componentB.component';
+import { LogInComponent } from './components/log-in/log-in.component';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ import { TestComponentB } from './components/test-component/test-componentB.comp
     ClickOutsideDirective,
     BackgroundComponent,
     TestComponentB,
+    LogInComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -34,17 +36,22 @@ import { TestComponentB } from './components/test-component/test-componentB.comp
 export class AppComponent {
   title = 'desktopV2';
 
-  protected navOpened: boolean = false;
-  protected canCloseModal: boolean = false;
+  protected navOpened = false;
+  protected canCloseModal = false;
 
-  protected taskModalOpened: boolean = false;
+  protected taskModalOpened = false;
+  logInModalOpened = false;
 
   protected movableWindowOpened = false;
 
   openCentralModal(modal: string) {
+    console.log(modal);
     switch (modal) {
       case 'tasks-modal':
         this.taskModalOpened = true;
+        break;
+      case 'log-in-modal':
+        this.logInModalOpened = true;
         break;
       default:
         console.error('Sorry, no modal with that name');
@@ -55,6 +62,9 @@ export class AppComponent {
     switch (modal) {
       case 'tasks-modal':
         this.taskModalOpened = false;
+        break;
+      case 'log-in-modal':
+        this.logInModalOpened = false;
         break;
       default:
         console.error('Sorry, no modal with that name');

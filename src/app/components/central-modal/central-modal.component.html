@@ -1,3 +1,8 @@
-<button class="p-1" (click)="closeModal()">X</button>
+<div class="flex flex-justify-between">
+  <h2 class="p-1 text-slate-500 text-lg font-bold">
+    {{ title }}
+  </h2>
+  <button class="p-1 bg-slate-500 w-8" (click)="closeModal()">X</button>
+</div>
 
 <ng-content></ng-content>
