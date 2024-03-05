@@ -1,44 +1,36 @@
 <background></background>
-<navmodal
-  class="nav-modal"
-  [ngClass]="{ 'nav-modal-open': navOpened }"
-  (clickOutside)="closeNavModal()"
-></navmodal>
 
-<button
-  class="btn bg-col-1 text-white z-10 absolute"
-  (click)="openNavModal()"
-  [ngClass]="{ invisible: navOpened }"
->
+<navmodal class="nav-modal"
+          [ngClass]="{ 'nav-modal-open': navOpened }"
+          (clickOutside)="closeNavModal()"></navmodal>
+
+<button class="btn bg-col-1 text-white z-10 absolute"
+        (click)="openNavModal()"
+        [ngClass]="{ invisible: navOpened }">
   &Rarr;
 </button>
 
-<central-modal
-  [title]="'Tasks'"
-  [modalName]="'tasks-modal'"
-  class="central-modal rounded-xl shadow-lg bg-stone-200"
-  *ngIf="taskModalOpened"
->
+<central-modal [title]="'Tasks'"
+               [modalName]="'tasks-modal'"
+               class="central-modal rounded-xl shadow-lg bg-stone-200"
+               *ngIf="taskModalOpened">
   <tasks />
 </central-modal>
 
-<!--  -->
 
-<central-modal
-  [title]="'Log In'"
-  [modalName]="'log-in-modal'"
-  class="central-modal rounded-xl shadow-lg bg-stone-200"
-  *ngIf="logInModalOpened"
-  ><log-in></log-in
-></central-modal>
+<central-modal [title]="'Log In'"
+               [modalName]="'log-in-modal'"
+               class="central-modal rounded-xl shadow-lg bg-stone-200"
+               *ngIf="logInModalOpened">
+  <log-in></log-in>
+</central-modal>
 
-<movable-window
-  class="absolute"
-  style="top: 0; left: 0"
-  *ngIf="movableWindowOpened"
-  (close)="movableWindowOpened = false"
->
+<movable-window class="absolute"
+                style="top: 0; left: 0"
+                *ngIf="movableWindowOpened"
+                (close)="movableWindowOpened = false">
   <test-component-b></test-component-b>
+
 </movable-window>
 
 <central-bottom-panel class="pos-fixed bottom center"></central-bottom-panel>

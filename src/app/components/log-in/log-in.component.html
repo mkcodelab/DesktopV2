@@ -1,0 +1,78 @@
+<div class="flex flex-col items-center mt-10">
+
+  <div>
+    <button class="bg-slate-500 p-2 text-white mr-2"
+            [ngClass]="{'text-yellow-500': isRegisterActive}"
+            (click)="isRegisterActive = true">Register Account</button>
+
+    <button class="bg-slate-500 p-2 text-white"
+            [ngClass]="{'text-yellow-500': !isRegisterActive}"
+            (click)="isRegisterActive = false">Log in</button>
+  </div>
+
+
+  <div class="flex flex-col mr-6 ml-6"
+       *ngIf="isRegisterActive">
+    <p>Register account</p>
+
+    <input required
+           class="mb-2 p-2"
+           type="text"
+           placeholder="username"
+           [(ngModel)]="username" />
+
+    <input required
+           class="mb-2 p-2"
+           type="email"
+           placeholder="email"
+           [(ngModel)]="email"
+           #emailInput="ngModel" />
+
+    <!-- validation message -->
+    <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
+      <span *ngIf="emailInput.errors?.['required']"
+            class="text-red-500">Email is required.</span>
+    </div>
+
+    <input required
+           class="mb-2 p-2"
+           type="text"
+           placeholder="password"
+           [(ngModel)]="password" />
+
+    <button class="bg-slate-500 p-2 text-white"
+            (click)="submit()">
+      Register
+    </button>
+
+  </div>
+
+  <div class="flex flex-col mr-6 ml-6 mt-2"
+       *ngIf="!isRegisterActive">
+    <input required
+           class="mb-2 p-2"
+           type="text"
+           placeholder="email"
+           [(ngModel)]="email" />
+
+    <input required
+           class="mb-2 p-2"
+           type="text"
+           placeholder="password"
+           [(ngModel)]="password" />
+
+    <button class="bg-slate-500 p-2 text-white"
+            (click)="submit()">
+      Log in
+    </button>
+  </div>
+
+  <div *ngIf="isLoggedIn">
+
+    <p>logged in as: {{userResponseData.user?.username}}</p>
+
+    <img class="w-10 h-10"
+         [src]="userResponseData.user?.image">
+  </div>
+
+</div>
