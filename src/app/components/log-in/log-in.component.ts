@@ -16,15 +16,25 @@ export interface UserInterface {
   standalone: true,
   selector: 'log-in',
   imports: [FormsModule, NgIf, NgClass, JsonPipe],
-  templateUrl: './log-in.component.html'
+  templateUrl: './log-in.component.html',
+  styles: `
+    .username-taken {
+      border: 2px solid #a94442;
+    }
+  `
 })
 export class LogInComponent {
   private url = 'https://api.realworld.io/api/';
 
   isLoggedIn = false;
-  username = '';
-  password = '';
-  email = '';
+
+  user = {
+    username: '',
+    password: '',
+    email: '',
+  }
+
+  usernameTaken = false
 
   isRegisterActive = true
 
@@ -57,8 +67,8 @@ export class LogInComponent {
   login() {
     const payload = {
       user: {
-        email: this.email,
-        password: this.password
+        email: this.user.email,
+        password: this.user.password
       }
     }
     this.http.post<{ user: UserInterface }>(this.url + 'users/login', payload).subscribe((response) => {
@@ -69,16 +79,25 @@ export class LogInComponent {
   }
 
   register() {
+    this.usernameTaken = false
     const payload = {
       user: {
-        username: this.username,
-        email: this.email,
-        password: this.password
+        username: this.user.username,
+        email: this.user.email,
+        password: this.user.password
       }
     }
-    this.closeModal();
-    this.http.post<{ user: UserInterface }>(this.url + 'users', payload).subscribe((response) => {
-      console.log(response);
+    this.http.post<{ user: UserInterface } | Error>(this.url + 'users', payload).subscribe({
+      next: (response) => {
+        console.log(response)
+      },
+      error: (response) => {
+        console.log(response)
+        if (response.error.errors.hasOwnProperty('username')) {
+          this.usernameTaken = true
+        }
+
+      }
     });
   }
 }
