@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from '../../app.component';
 import { HttpClient } from '@angular/common/http';
@@ -21,7 +21,8 @@ export interface UserInterface {
     .username-taken {
       border: 2px solid #a94442;
     }
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogInComponent {
   private url = 'https://api.realworld.io/api/';
@@ -100,4 +101,5 @@ export class LogInComponent {
       }
     });
   }
+
 }

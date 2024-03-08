@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { CheckRender } from '../decorators/check-render.decorator';
 
 @Component({
   standalone: true,
@@ -26,7 +27,11 @@ import { LocalStorageService } from '../../services/local-storage.service';
       </button>
     </div>`,
 })
+@CheckRender()
+// @CheckRender
 export class BackgroundComponent implements OnInit {
+
+
   localStorageService = inject(LocalStorageService);
 
   id = 0;
