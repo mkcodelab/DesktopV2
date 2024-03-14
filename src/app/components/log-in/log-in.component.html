@@ -1,107 +1,107 @@
 <div class="flex flex-col items-center mt-10">
-       <div>
-              <button class="bg-slate-500 p-2 text-white mr-2"
-                      [ngClass]="{'text-yellow-500': isRegisterActive}"
-                      (click)="isRegisterActive = true">Register Account</button>
+    <div>
+        <button class="bg-slate-500 p-2 text-white mr-2"
+                [ngClass]="{'text-yellow-500': isRegisterActive}"
+                (click)="isRegisterActive = true">Register Account</button>
 
-              <button class="bg-slate-500 p-2 text-white"
-                      [ngClass]="{'text-yellow-500': !isRegisterActive}"
-                      (click)="isRegisterActive = false">Log in</button>
-       </div>
+        <button class="bg-slate-500 p-2 text-white"
+                [ngClass]="{'text-yellow-500': !isRegisterActive}"
+                (click)="isRegisterActive = false">Log in</button>
+    </div>
 
 
-       <form #registerForm
-             class="flex flex-col mr-6 ml-6"
-             *ngIf="isRegisterActive">
+    <form #registerForm
+          class="flex flex-col mr-6 ml-6"
+          *ngIf="isRegisterActive">
 
-              <input required
-                     minlength="3"
-                     class="mb-2 mt-2 p-2"
-                     [ngClass]="{'username-taken' : usernameTaken}"
-                     type="text"
-                     placeholder="username"
-                     name="username"
-                     [(ngModel)]="user.username"
-                     #usernameInput="ngModel"
-                     (input)="usernameTaken = false" />
+        <input required
+               minlength="3"
+               class="mb-2 mt-2 p-2"
+               [ngClass]="{'username-taken' : usernameTaken}"
+               type="text"
+               placeholder="username"
+               name="username"
+               [(ngModel)]="user.username"
+               #usernameInput="ngModel"
+               (input)="usernameTaken = false" />
 
-              <!-- validation message -->
-              <div class="text-red-500"
-                   *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)">
-                     <span *ngIf="usernameInput.errors?.['required']">Username is required.</span>
-                     <span *ngIf="usernameInput.errors?.['minlength']">Username too short</span>
-              </div>
+        <!-- validation message -->
+        <div class="text-red-500"
+             *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)">
+            <span *ngIf="usernameInput.errors?.['required']">Username is required.</span>
+            <span *ngIf="usernameInput.errors?.['minlength']">Username too short</span>
+        </div>
 
-              <div *ngIf="usernameTaken">
-                     <span class="text-red-500">Username taken, choose another one</span>
-              </div>
+        <div *ngIf="usernameTaken">
+            <span class="text-red-500">Username taken, choose another one</span>
+        </div>
 
-              <input required
-                     class="mb-2 p-2"
-                     email
-                     type="email"
-                     name="email"
-                     placeholder="email"
-                     [(ngModel)]="user.email"
-                     #emailInput="ngModel" />
+        <input required
+               class="mb-2 p-2"
+               email
+               type="email"
+               name="email"
+               placeholder="email"
+               [(ngModel)]="user.email"
+               #emailInput="ngModel" />
 
-              <!-- validation message -->
-              <div class="text-red-500"
-                   *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
-                     <span *ngIf="emailInput.errors?.['required']">Email is required.</span>
-                     <span *ngIf="emailInput.errors?.['email']">invalid email adress</span>
-              </div>
+        <!-- validation message -->
+        <div class="text-red-500"
+             *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
+            <span *ngIf="emailInput.errors?.['required']">Email is required.</span>
+            <span *ngIf="emailInput.errors?.['email']">invalid email adress</span>
+        </div>
 
-              <input required
-                     class="mb-2 p-2"
-                     type="text"
-                     name="password"
-                     placeholder="password"
-                     [(ngModel)]="user.password" />
+        <input required
+               class="mb-2 p-2"
+               type="text"
+               name="password"
+               placeholder="password"
+               [(ngModel)]="user.password" />
 
-              <button class="bg-slate-500 p-2 text-white"
-                      (click)="submit()">
-                     Register
-              </button>
+        <button class="bg-slate-500 p-2 text-white"
+                (click)="submit()">
+            Register
+        </button>
 
-       </form>
+    </form>
 
-       <form class="flex flex-col mr-6 ml-6 mt-2"
-             *ngIf="!isRegisterActive">
-              <input required
-                     class="mb-2 p-2"
-                     email
-                     name="loginEmail"
-                     type="email"
-                     placeholder="email"
-                     [(ngModel)]="user.email"
-                     #loginEmailInput="ngModel" />
+    <form class="flex flex-col mr-6 ml-6 mt-2"
+          *ngIf="!isRegisterActive">
+        <input required
+               class="mb-2 p-2"
+               email
+               name="loginEmail"
+               type="email"
+               placeholder="email"
+               [(ngModel)]="user.email"
+               #loginEmailInput="ngModel" />
 
-              <div class="text-red-500"
-                   *ngIf="loginEmailInput.invalid && (loginEmailInput.dirty || loginEmailInput.touched)">
-                     <span *ngIf="loginEmailInput.errors?.['required']">Email is required.</span>
-                     <span *ngIf="loginEmailInput.errors?.['email']">invalid email adress</span>
-              </div>
+        <div class="text-red-500"
+             *ngIf="loginEmailInput.invalid && (loginEmailInput.dirty || loginEmailInput.touched)">
+            <span *ngIf="loginEmailInput.errors?.['required']">Email is required.</span>
+            <span *ngIf="loginEmailInput.errors?.['email']">invalid email adress</span>
+        </div>
 
-              <input required
-                     class="mb-2 p-2"
-                     name="loginPassword"
-                     type="text"
-                     placeholder="password"
-                     [(ngModel)]="user.password" />
+        <input required
+               class="mb-2 p-2"
+               name="loginPassword"
+               type="text"
+               placeholder="password"
+               [(ngModel)]="user.password" />
 
-              <button class="bg-slate-500 p-2 text-white"
-                      (click)="submit()">
-                     Log in
-              </button>
-       </form>
+        <button class="bg-slate-500 p-2 text-white"
+                (click)="submit()">
+            Log in
+        </button>
+    </form>
 
-       <div *ngIf="isLoggedIn">
+    <div *ngIf="isLoggedIn">
 
-              <p>logged in as: {{userResponseData.user?.username}}</p>
+        <p>logged in as: {{userResponseData.user?.username}}</p>
 
-              <img class="w-10 h-10"
-                   [src]="userResponseData.user?.image">
-       </div>
+        <img class="w-10 h-10"
+             [src]="userResponseData.user?.image">
+    </div>
 
 </div>
