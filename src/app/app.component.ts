@@ -11,6 +11,7 @@ import { ClickOutsideDirective } from './directives/clickOutside.directive';
 import { BackgroundComponent } from './components/background/background.component';
 import { TestComponentB } from './components/test-component/test-componentB.component';
 import { LogInComponent } from './components/log-in/log-in.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +29,7 @@ import { LogInComponent } from './components/log-in/log-in.component';
     BackgroundComponent,
     TestComponentB,
     LogInComponent,
+    HeaderComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -91,5 +93,9 @@ export class AppComponent {
       this.navOpened = false;
       this.canCloseModal = false;
     }
+  }
+
+  get openedNav(): boolean {
+    return this.navOpened
   }
 }

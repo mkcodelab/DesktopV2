@@ -1,14 +1,18 @@
 <background></background>
 
-<navmodal class="nav-modal"
+<header-component class="absolute z-20 w-screen"></header-component>
+
+<router-outlet class="absolute"></router-outlet>
+
+<navmodal class="nav-modal z-30"
           [ngClass]="{ 'nav-modal-open': navOpened }"
           (clickOutside)="closeNavModal()"></navmodal>
 
-<button class="btn bg-col-1 text-white z-10 absolute"
+<!-- <button class="btn bg-col-1 text-white z-10 absolute"
         (click)="openNavModal()"
         [ngClass]="{ invisible: navOpened }">
   &Rarr;
-</button>
+</button> -->
 
 <central-modal [title]="'Tasks'"
                [modalName]="'tasks-modal'"

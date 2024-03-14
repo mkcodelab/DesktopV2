@@ -1,1 +1,17 @@
-<h1 class="col-w p-a bg-col-1 header">{{welcomeText}}</h1>
+<div class="bg-slate-400">
+  <button class="btn bg-col-1 text-white z-10 absolute"
+          (click)="openNavModal()"
+          [ngClass]="{ invisible: navOpened }">
+    &Rarr;
+  </button>
+
+  <div class="flex ml-9">
+    <div class="p-2 cursor-pointer"
+         [ngClass]="{ 'mr-2': !isLast}"
+         *ngFor="let item of navItems; last as isLast"
+         [routerLink]="item.url">
+      {{item.name}}
+    </div>
+
+  </div>
+</div>

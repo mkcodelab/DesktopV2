@@ -1,19 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AppComponent } from '../../app.component';
+import { NgClass, NgFor } from '@angular/common';
+import { RouterLink } from '@angular/router';
+
+export interface NavItem {
+  name: string,
+  url: string
+}
 
 @Component({
   standalone: true,
-
-  selector: 'app-header',
+  imports: [NgClass, NgFor, RouterLink],
+  selector: 'header-component',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  constructor() { }
+  app: AppComponent = inject(AppComponent)
 
-  ngOnInit(): void {
+  navItems: NavItem[] = [
+    { name: 'route1', url: 'route1' },
+    { name: 'route2', url: 'route2' },
+    { name: 'route3', url: 'route3' },
+    { name: 'route4', url: 'route4' },
+  ]
+
+  openNavModal() {
+    this.app.openNavModal()
   }
 
-  welcomeText = 'Welcome to empty desktop'
+  get navOpened() {
+    return this.app.openedNav
+  }
 
 }
