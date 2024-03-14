@@ -2,7 +2,7 @@ import { AsyncPipe, NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { LocalStorage } from '../decorators/localStorage.decorator';
+import { LocalStorage } from '../../decorators/localStorage.decorator';
 
 @Component({
   standalone: true,

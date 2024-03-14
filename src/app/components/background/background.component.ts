@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { CheckRender } from '../decorators/check-render.decorator';
+import { CheckRender } from '../../decorators/check-render.decorator';
 
 @Component({
   standalone: true,
