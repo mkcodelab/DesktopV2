@@ -33,14 +33,6 @@ export class TasksComponent implements OnInit {
   }
 
   getAll() {
-    // this.taskService.getAll().then((response) => {
-    //   if (Array.isArray(response)) {
-    //     this.listState = { state: 'success', results: response };
-    //   } else {
-    //     this.listState = { state: 'error', error: response };
-    //   }
-    // });
-
     this.taskService.getAll().subscribe({
       next: (response) => {
         this.listState = { state: 'success', results: response };
@@ -49,13 +41,6 @@ export class TasksComponent implements OnInit {
         this.listState = { state: 'error', error: err };
       },
     });
-    // .subscribe((response)=> {
-    //   if (Array.isArray(response)) {
-    //         this.listState = { state: 'success', results: response };
-    //       } else {
-    //         this.listState = { state: 'error', error: response };
-    //       }
-    // })
   }
 
   editTask(taskId: number) {
@@ -90,22 +75,9 @@ export class TasksComponent implements OnInit {
         alert(err.message);
       },
     });
-    // this.taskService.add(name).then((response) => {
-    //   if ('id' in response) {
-    //     this.listState = {
-    //       state: 'success',
-    //       results: tasks.concat(response),
-    //     };
-    //   } else {
-    //     alert(response.message);
-    //   }
-    // });
   }
 
   deleteTask(taskId: number) {
-    // this.taskService.delete(taskId).then(() => {
-    //   this.getAll()
-    // })
     this.taskService.delete(taskId).subscribe(() => {
       // this.getAll()
       if (this.listState.state === 'success') {
@@ -118,15 +90,6 @@ export class TasksComponent implements OnInit {
 
   // FIX THIS
   updateTask(taskId: number, payload: TaskUpdatePayload) {
-    // this.taskService.update(taskId, payload).then(() => {
-
-    //   this.toggleTaskEdit(taskId, false)
-    //   setTimeout(()=>{
-    //     this.getAll()
-    //   }, 200)
-
-    // })
-
     this.taskService.update(taskId, payload).subscribe(() => {
       this.toggleTaskEdit(taskId, false);
       setTimeout(() => {

@@ -5,11 +5,11 @@ import { HttpClient } from '@angular/common/http';
 import { JsonPipe, NgClass, NgIf } from '@angular/common';
 
 export interface UserInterface {
-  email: string,
-  username: string,
-  bio: string | null,
-  image: string,
-  token: string
+  email: string;
+  username: string;
+  bio: string | null;
+  image: string;
+  token: string;
 }
 
 @Component({
@@ -33,31 +33,29 @@ export class LogInComponent {
     username: '',
     password: '',
     email: '',
-  }
+  };
 
-  usernameTaken = false
+  usernameTaken = false;
 
-  isRegisterActive = true
+  isRegisterActive = true;
 
   app = inject(AppComponent);
 
   http = inject(HttpClient);
 
-  success = false
+  success = false;
 
-  userResponseData: { user: UserInterface | undefined } = { user: undefined }
+  userResponseData: { user: UserInterface | undefined } = { user: undefined };
 
   submit() {
-
     if (this.isRegisterActive) {
-      this.register()
+      this.register();
     } else {
-      this.login()
+      this.login();
     }
 
     if (this.success) {
       this.closeModal();
-
     }
   }
 
@@ -69,37 +67,39 @@ export class LogInComponent {
     const payload = {
       user: {
         email: this.user.email,
-        password: this.user.password
-      }
-    }
-    this.http.post<{ user: UserInterface }>(this.url + 'users/login', payload).subscribe((response) => {
-      console.log(response);
-      this.userResponseData = response
-      this.isLoggedIn = true
-    });
+        password: this.user.password,
+      },
+    };
+    this.http
+      .post<{ user: UserInterface }>(this.url + 'users/login', payload)
+      .subscribe((response) => {
+        console.log(response);
+        this.userResponseData = response;
+        this.isLoggedIn = true;
+      });
   }
 
   register() {
-    this.usernameTaken = false
+    this.usernameTaken = false;
     const payload = {
       user: {
         username: this.user.username,
         email: this.user.email,
-        password: this.user.password
-      }
-    }
-    this.http.post<{ user: UserInterface } | Error>(this.url + 'users', payload).subscribe({
-      next: (response) => {
-        console.log(response)
+        password: this.user.password,
       },
-      error: (response) => {
-        console.log(response)
-        if (response.error.errors.hasOwnProperty('username')) {
-          this.usernameTaken = true
-        }
-
-      }
-    });
+    };
+    this.http
+      .post<{ user: UserInterface } | Error>(this.url + 'users', payload)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+        error: (response) => {
+          console.log(response);
+          if (response.error.errors.hasOwnProperty('username')) {
+            this.usernameTaken = true;
+          }
+        },
+      });
   }
-
 }

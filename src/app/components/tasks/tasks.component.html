@@ -1,74 +1,67 @@
 <div>
-  <h1 class="text-center p-2 text-slate-500 text-lg font-bold">Task List</h1>
+    <h1 class="text-center p-2 text-slate-500 text-lg font-bold">Task List</h1>
 
-  <div class="p-2 text-center">
-    <input
-      class="h-8 rounded border-slate-500 border-2"
-      #taskInput
-      type="text"
-      (keyup.enter)="
+    <div class="p-2 text-center">
+        <input class="h-8 rounded border-slate-500 border-2"
+               #taskInput
+               type="text"
+               (keyup.enter)="
         listState.state === 'success' &&
           addTask(taskInput.value, listState.results);
         taskInput.value = ''
-      "
-    />
-    <button
-      class="bg-slate-500 w-8 h-8 rounded ml-2 text-white"
-      (click)="
+      " />
+        <button class="bg-slate-500 w-8 h-8 rounded ml-2 text-white"
+                (click)="
         listState.state === 'success' &&
           addTask(taskInput.value, listState.results);
         taskInput.value = ''
-      "
-    >
-      +
-    </button>
-  </div>
+      ">
+            +
+        </button>
+    </div>
 
-  <div class="p-2" *ngIf="listState.state === 'success'">
-    <button
-      class="p-2 mt-2 flex justify-between w-full"
-      [ngClass]="task.done ? 'bg-lime-500/50' : 'bg-slate-500/25'"
-      *ngFor="let task of listState.results"
-      (dblclick)="editTask(task.id)"
-    >
-      <p [class.line-through]="task.done" *ngIf="!task.isEditMode">
-        {{ task.name }}
-      </p>
+    <div class="p-2"
+         *ngIf="listState.state === 'success'">
+        <button class="p-2 mt-2 flex justify-between w-full"
+                [ngClass]="task.done ? 'bg-lime-500/50' : 'bg-slate-500/25'"
+                *ngFor="let task of listState.results"
+                (dblclick)="editTask(task.id)">
+            <p [class.line-through]="task.done"
+               *ngIf="!task.isEditMode">
+                {{ task.name }}
+            </p>
 
-      <div *ngIf="task.isEditMode">
-        <input #taskEditInput type="text" [value]="task.name" />
-        <button
-          class="bg-slate-500/25 p-1 ml-1 mr-1"
-          (click)="
+            <div *ngIf="task.isEditMode">
+                <input #taskEditInput
+                       type="text"
+                       [value]="task.name" />
+                <button class="bg-slate-500/25 p-1 ml-1 mr-1"
+                        (click)="
             updateTask(task.id, { name: taskEditInput.value, done: task.done })
-          "
-        >
-          apply
-        </button>
-        <button class="bg-slate-500/25 p-1" (click)="cancelUpdate(task.id)">
-          X
-        </button>
-      </div>
+          ">
+                    apply
+                </button>
+                <button class="bg-slate-500/25 p-1"
+                        (click)="cancelUpdate(task.id)">
+                    X
+                </button>
+            </div>
 
-      <div>
-        <button
-          class="bg-slate-500/25 p-1 mr-1 w-8 h-8 rounded"
-          [ngClass]="task.done ? 'text-green-500' : 'text-red-500'"
-          (click)="toggleDoneState(task.id)"
-        >
-          &check;
+            <div>
+                <button class="bg-slate-500/25 p-1 mr-1 w-8 h-8 rounded"
+                        [ngClass]="task.done ? 'text-green-500' : 'text-red-500'"
+                        (click)="toggleDoneState(task.id)">
+                    &check;
+                </button>
+                <button class="bg-slate-500/25 p-1 w-8 h-8 rounded"
+                        (click)="deleteTask(task.id)">
+                    &cross;
+                </button>
+                <p>{{ task.createdAt | customDate }}</p>
+            </div>
         </button>
-        <button
-          class="bg-slate-500/25 p-1 w-8 h-8 rounded"
-          (click)="deleteTask(task.id)"
-        >
-          &cross;
-        </button>
-        <p>{{ task.createdAt | customDate }}</p>
-      </div>
-    </button>
-  </div>
+    </div>
 
-  <p *ngIf="listState.state === 'loading'">Loading...</p>
-  <p *ngIf="listState.state === 'error'">{{ listState.error.message }}</p>
+    <p *ngIf="listState.state === 'loading'">Loading...</p>
+    <p *ngIf="listState.state === 'error'">{{ listState.error.message }}</p>
 </div>
