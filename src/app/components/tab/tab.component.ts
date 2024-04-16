@@ -6,7 +6,7 @@ import { TabsContainerComponent } from './tabs-container.component';
   selector: 'tab',
   imports: [],
   template: `
-    <div [hidden]="!active" class="p-2 bg-slate-200">
+    <div [hidden]="!active" class="p-2 bg-slate-200 w-full">
       <ng-content></ng-content>
     </div>
   `,
