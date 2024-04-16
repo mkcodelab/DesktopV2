@@ -18,7 +18,7 @@
                [modalName]="'tasks-modal'"
                class="central-modal rounded-xl shadow-lg bg-stone-200"
                *ngIf="taskModalOpened">
-  <tasks />
+    <tasks />
 </central-modal>
 
 
@@ -26,14 +26,32 @@
                [modalName]="'log-in-modal'"
                class="central-modal rounded-xl shadow-lg bg-stone-200"
                *ngIf="logInModalOpened">
-  <log-in></log-in>
+    <log-in></log-in>
+</central-modal>
+
+<central-modal title="tab-modal"
+               modalName="tab-modal"
+               class="central-modal rounded-xl shadow-lg bg-stone-200"
+               *ngIf="tabModalOpened">
+
+    <tabs-container class="max-w-28">
+        <tab title="tab1">tab content</tab>
+
+        <tab title="tab2">tab content 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure voluptatum modi,
+            voluptatem nam expedita totam asperiores accusamus repellendus eveniet odit.</tab>
+
+        <tab title="tab3">tab content 3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, iste
+            voluptate sunt commodi ad nisi nobis nam est deserunt Lorem ipsum dolor sit amet consectetur, adipisicing
+            elit. Eveniet quia ratione incidunt esse dolor, est fugiat sint nihil velit excepturi.</tab>
+    </tabs-container>
+
 </central-modal>
 
 <movable-window class="absolute"
                 style="top: 0; left: 0"
                 *ngIf="movableWindowOpened"
                 (close)="movableWindowOpened = false">
-  <test-component-b></test-component-b>
+    <test-component-b></test-component-b>
 
 </movable-window>
 

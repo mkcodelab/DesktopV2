@@ -5,7 +5,7 @@
 $colGrayLight: #999;
 $colGrayMedium: #666;
 $colGrayDark: #333;
-$halfTransparent: rgba(0,0,0,.5);
+$halfTransparent: rgba(0, 0, 0, 0.5);
 
 // * {
 //   margin: 0;
@@ -20,16 +20,15 @@ body {
   overflow: hidden;
 }
 
-
 // input validation classes
-.ng-valid[required], .ng-valid.required  {
-  border: 2px solid #42A948;
+.ng-valid[required],
+.ng-valid.required {
+  border: 2px solid #42a948;
 }
 
 .ng-invalid:not(form).ng-touched {
   border: 2px solid #a94442;
 }
-
 
 .ff-1 {
   font-family: helvetica;
@@ -84,21 +83,21 @@ body {
 // paddings
 
 .p-a {
-  padding: .5em;
+  padding: 0.5em;
 }
 
 // margins
 
 .m-t {
-  margin-top: .5em;
+  margin-top: 0.5em;
 }
 .m-b {
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
 }
 
 // $headerHeight: 50px;
 $offsetTop: 50px;
-$border: 1px solid rgba(0,0,0,.5);
+$border: 1px solid rgba(0, 0, 0, 0.5);
 
 .nav-modal {
   position: fixed;
@@ -108,7 +107,7 @@ $border: 1px solid rgba(0,0,0,.5);
   height: 100vh;
   width: 200px;
   // border-right: $border;
-  background: linear-gradient(to right, rgba(0,0,0,.5), transparent);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent);
   transition: transform 0.3s ease-in-out;
   transform: translateX(-100%);
 }
@@ -117,10 +116,10 @@ $border: 1px solid rgba(0,0,0,.5);
 }
 
 .btn {
-  padding: .5em;
+  padding: 0.5em;
   border: 1px solid;
   border-radius: 5px;
-  transition: transform .3s ease, filter .3s ease;
+  transition: transform 0.3s ease, filter 0.3s ease;
   cursor: pointer;
   &:hover {
     transform: translateY(1px);
@@ -157,7 +156,7 @@ $border: 1px solid rgba(0,0,0,.5);
 }
 
 .slide-right {
-  transition: transform .3s ease, filter .3s ease;
+  transition: transform 0.3s ease, filter 0.3s ease;
   &:hover {
     transform: translateX(4px);
     filter: brightness(120%);
@@ -169,7 +168,7 @@ $border: 1px solid rgba(0,0,0,.5);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  backdrop-filter: blur(0.1);
+  backdrop-filter: blur(2px);
   min-width: 500px;
   min-height: 500px;
 }
@@ -183,10 +182,10 @@ $border: 1px solid rgba(0,0,0,.5);
   transform: translateX(-50%);
 }
 .bottom {
-  bottom: 0
+  bottom: 0;
 }
 
 @font-face {
-  font-family: 'sixtyfour';
-  src: url('assets/fonts/Sixtyfour-Regular.ttf');
+  font-family: "sixtyfour";
+  src: url("assets/fonts/Sixtyfour-Regular.ttf");
 }

@@ -12,6 +12,8 @@ import { BackgroundComponent } from './components/background/background.componen
 import { TestComponentB } from './components/test-component/test-componentB.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { HeaderComponent } from './components/header/header.component';
+import { TabsContainerComponent } from './components/tab/tabs-container.component';
+import { TabComponent } from './components/tab/tab.component';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +31,9 @@ import { HeaderComponent } from './components/header/header.component';
     BackgroundComponent,
     TestComponentB,
     LogInComponent,
-    HeaderComponent
+    HeaderComponent,
+    TabsContainerComponent,
+    TabComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -46,6 +50,8 @@ export class AppComponent {
 
   protected movableWindowOpened = false;
 
+  protected tabModalOpened = false;
+
   openCentralModal(modal: string) {
     console.log(modal);
     switch (modal) {
@@ -54,6 +60,9 @@ export class AppComponent {
         break;
       case 'log-in-modal':
         this.logInModalOpened = true;
+        break;
+      case 'tab-modal':
+        this.tabModalOpened = true;
         break;
       default:
         console.error('Sorry, no modal with that name');
@@ -67,6 +76,9 @@ export class AppComponent {
         break;
       case 'log-in-modal':
         this.logInModalOpened = false;
+        break;
+      case 'tab-modal':
+        this.tabModalOpened = false;
         break;
       default:
         console.error('Sorry, no modal with that name');
@@ -96,6 +108,6 @@ export class AppComponent {
   }
 
   get openedNav(): boolean {
-    return this.navOpened
+    return this.navOpened;
   }
 }
