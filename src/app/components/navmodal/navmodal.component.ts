@@ -1,38 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { CommonModule } from '@angular/common';
 import { TestComponentA } from '../test-component/test-componentA.component';
-
-interface NavItem {
-  name: string;
-}
+import { ModalService } from '../modal-container/modal.service';
 
 @Component({
   standalone: true,
   imports: [CommonModule, TestComponentA],
   selector: 'navmodal',
   templateUrl: './navmodal.component.html',
-  // styleUrls: ['./navmodal.component.scss'],
 })
 export class NavmodalComponent {
   constructor(app: AppComponent) {
     this.app = app;
   }
   app: AppComponent;
+  private modalService: ModalService = inject(ModalService);
 
   closeNav() {
     this.app.closeNavModal();
   }
 
-  itemClicked(item: NavItem) {
-    console.log(item);
-    this.openCentralModal('test');
-  }
-
-  // change those for signals / observables
-
   openCentralModal(modal: string) {
-    this.app.openCentralModal(modal);
+    this.modalService.openCentralModal(modal);
   }
 
   openMovableWindow(windowName: string) {

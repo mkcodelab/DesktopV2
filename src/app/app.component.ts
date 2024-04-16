@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CentralModalComponent } from './components/central-modal/central-modal.component';
 import { CentralBottomPanelComponent } from './components/central-bottom-panel/central-bottom-panel.component';
@@ -14,6 +14,7 @@ import { LogInComponent } from './components/log-in/log-in.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TabsContainerComponent } from './components/tab/tabs-container.component';
 import { TabComponent } from './components/tab/tab.component';
+import { ModalContainerComponent } from './components/modal-container/modal-container.component';
 
 @Component({
   selector: 'app-root',
@@ -34,6 +35,7 @@ import { TabComponent } from './components/tab/tab.component';
     HeaderComponent,
     TabsContainerComponent,
     TabComponent,
+    ModalContainerComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -45,45 +47,8 @@ export class AppComponent {
   protected navOpened = false;
   protected canCloseModal = false;
 
-  protected taskModalOpened = false;
-  logInModalOpened = false;
-
+  //   move it to movableWindowComponent / service
   protected movableWindowOpened = false;
-
-  protected tabModalOpened = false;
-
-  openCentralModal(modal: string) {
-    console.log(modal);
-    switch (modal) {
-      case 'tasks-modal':
-        this.taskModalOpened = true;
-        break;
-      case 'log-in-modal':
-        this.logInModalOpened = true;
-        break;
-      case 'tab-modal':
-        this.tabModalOpened = true;
-        break;
-      default:
-        console.error('Sorry, no modal with that name');
-    }
-  }
-
-  closeCentralModal(modal: string) {
-    switch (modal) {
-      case 'tasks-modal':
-        this.taskModalOpened = false;
-        break;
-      case 'log-in-modal':
-        this.logInModalOpened = false;
-        break;
-      case 'tab-modal':
-        this.tabModalOpened = false;
-        break;
-      default:
-        console.error('Sorry, no modal with that name');
-    }
-  }
 
   openMovableWindow(windowName: string) {
     switch (windowName) {

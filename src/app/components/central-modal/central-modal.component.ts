@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { AppComponent } from '../../app.component';
+import { Component, Input } from '@angular/core';
 import { UsernamesComponent } from '../usernames/usernames.component';
 import { TasksComponent } from '../tasks/tasks.component';
 import { NgIf } from '@angular/common';
+import { ModalService } from '../modal-container/modal.service';
 
 @Component({
   standalone: true,
@@ -11,28 +11,23 @@ import { NgIf } from '@angular/common';
   templateUrl: './central-modal.component.html',
   styleUrls: ['./central-modal.component.scss'],
 })
-export class CentralModalComponent implements OnInit {
-  constructor(app: AppComponent) {
-    this.app = app;
+export class CentralModalComponent {
+  constructor(private modalService: ModalService) {
+    this.modalService = modalService;
   }
 
-  app: AppComponent;
-
-  showUsernames = false;
+  ngOnInit() {
+    // has to be registered onInit, because there is no modalName initialized in constructor
+    this.modalService.registerModal(this.modalName);
+  }
 
   @Input()
   title = '';
 
   @Input({ required: true })
-  modalName = '';
-
-  ngOnInit(): void {}
+  modalName: string;
 
   closeModal() {
-    this.app.closeCentralModal(this.modalName);
-  }
-
-  toggleShowUsernames() {
-    this.showUsernames = !this.showUsernames;
+    this.modalService.closeCentralModal(this.modalName);
   }
 }

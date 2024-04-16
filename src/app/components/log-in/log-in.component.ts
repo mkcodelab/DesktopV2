@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from '../../app.component';
 import { HttpClient } from '@angular/common/http';
 import { JsonPipe, NgClass, NgIf } from '@angular/common';
+import { ModalService } from '../modal-container/modal.service';
 
 export interface UserInterface {
   email: string;
@@ -43,6 +44,8 @@ export class LogInComponent {
 
   http = inject(HttpClient);
 
+  modalService = inject(ModalService);
+
   success = false;
 
   userResponseData: { user: UserInterface | undefined } = { user: undefined };
@@ -60,7 +63,7 @@ export class LogInComponent {
   }
 
   closeModal() {
-    this.app.closeCentralModal('log-in-modal');
+    this.modalService.closeCentralModal('log-in-modal');
   }
 
   login() {
