@@ -28,17 +28,16 @@ import { LogInComponent } from '../log-in/log-in.component';
 })
 export class ModalContainerComponent {
   modalService = inject(ModalService);
-  cdr = inject(ChangeDetectorRef);
+  ref = inject(ChangeDetectorRef);
 
   //   run detect changes when modalService opens or close some modals.
   ngOnInit() {
     this.modalService.modalStateChanged.subscribe(() => {
-      this.cdr.detectChanges();
+      this.ref.detectChanges();
     });
   }
 
   isModalOpened(modalName: string) {
-    console.log(modalName);
     return this.modalService.isModalOpened(modalName);
   }
 }

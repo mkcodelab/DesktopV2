@@ -1,5 +1,5 @@
 import { AsyncPipe, NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { LocalStorage } from '../../decorators/localStorage.decorator';
@@ -13,6 +13,7 @@ import { LocalStorage } from '../../decorators/localStorage.decorator';
 })
 export class TimerComponent {
   protected localStorageService = inject(LocalStorageService);
+  private ref = inject(ChangeDetectorRef);
 
   @LocalStorage(true, 'timerColor') timerColor!: string | null;
 
