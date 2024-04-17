@@ -21,8 +21,8 @@ export class NavmodalComponent {
     this.app.closeNavModal();
   }
 
-  openCentralModal(modal: string) {
-    this.modalService.openCentralModal(modal);
+  openModal(modal: string) {
+    this.modalService.openModal(modal);
   }
 
   openMovableWindow(windowName: string) {

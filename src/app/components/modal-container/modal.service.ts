@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 interface RegisteredModals {
   name: string;
@@ -11,20 +12,27 @@ interface RegisteredModals {
 export class ModalService {
   private registeredModals: RegisteredModals[] = [];
 
-  openCentralModal(modalName: string) {
+  public modalStateChanged = new Subject<string>();
+
+  openModal(modalName: string) {
     for (let modal of this.registeredModals) {
       if (modal.name === modalName) {
-        modal.isOpened = true;
+        this.changeModalState(true, modal);
       }
     }
   }
 
-  closeCentralModal(modalName: string) {
+  closeModal(modalName: string) {
     for (let modal of this.registeredModals) {
       if (modal.name === modalName) {
-        modal.isOpened = false;
+        this.changeModalState(false, modal);
       }
     }
+  }
+
+  changeModalState(to: boolean, modal: RegisteredModals) {
+    modal.isOpened = to;
+    this.modalStateChanged.next(modal.name);
   }
 
   isModalOpened(modalName: string) {

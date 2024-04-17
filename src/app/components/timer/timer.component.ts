@@ -1,5 +1,5 @@
 import { AsyncPipe, NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { LocalStorage } from '../../decorators/localStorage.decorator';
@@ -11,7 +11,7 @@ import { LocalStorage } from '../../decorators/localStorage.decorator';
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.scss'],
 })
-export class TimerComponent implements OnInit {
+export class TimerComponent {
   protected localStorageService = inject(LocalStorageService);
 
   @LocalStorage(true, 'timerColor') timerColor!: string | null;
@@ -31,12 +31,6 @@ export class TimerComponent implements OnInit {
     setInterval(() => observer.next(this.getTime()), 1000);
   });
 
-  ngOnInit(): void {
-    // this.timerColor = this.getTimerColor();
-    console.log('test')
-    console.log(this.timerColor)
-  }
-
   getTime() {
     let date = new Date();
     let h = date.getHours().toString().padStart(2, '0');
@@ -51,12 +45,5 @@ export class TimerComponent implements OnInit {
 
   setTimerColor(color: string) {
     this.timerColor = color;
-    // this.localStorageService.setItem('timerColor', this.timerColor);
   }
-
-  // changed for localstorage decorator
-
-  // getTimerColor() {
-  //   return this.localStorageService.getItem('timerColor');
-  // }
 }

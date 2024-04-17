@@ -28,6 +28,6 @@ export class CentralModalComponent {
   modalName: string;
 
   closeModal() {
-    this.modalService.closeCentralModal(this.modalName);
+    this.modalService.closeModal(this.modalName);
   }
 }

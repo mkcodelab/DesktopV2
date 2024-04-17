@@ -63,7 +63,7 @@ export class LogInComponent {
   }
 
   closeModal() {
-    this.modalService.closeCentralModal('log-in-modal');
+    this.modalService.closeModal('log-in-modal');
   }
 
   login() {
