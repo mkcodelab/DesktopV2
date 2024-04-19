@@ -7,27 +7,26 @@
 
             <div class="flex flex-column bg-slate-500 w-1/2 p-4">
 
-                <h2 class="text-lg">{{title}}</h2>
+                <h2 class="text-lg text-white mb-4">{{title}}</h2>
 
                 <img [src]="imageUrl"
-                     class="max-h-80 object-cover"
+                     class="max-h-80 object-cover cursor-pointer"
                      alt="APOD"
                      (click)="enlarge()">
 
-                <div class="p-2">
-                    <p>{{description}}</p>
-                </div>
+                <p class="text-white mt-4">{{description}}</p>
             </div>
         </div>
     </div>
 
 </div>
 <!-- lightbox -->
-<div class="absolute z-40 min-w-full min-h-full overflow-auto"
+<div class="absolute z-40"
      *ngIf="showLightbox">
-    <button class="absolute right-0 top-0 bg-white p-2 m-2"
-            (click)="showLightbox = false">close</button>
-    <div>
+    <button class="absolute right-0 top-0 bg-white/50 p-2 m-8  rounded-lg"
+            (click)="showLightbox = false">&#10006;</button>
+    <div class="overflow-auto"
+         style="max-width: 100vw; max-height: 100vh;">
         <img [src]="hdImageUrl"
              alt="APOD"
              class="object-contain">
