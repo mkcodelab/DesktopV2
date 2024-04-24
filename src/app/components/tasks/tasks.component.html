@@ -5,27 +5,22 @@
         <input class="h-8 rounded border-slate-500 border-2"
                #taskInput
                type="text"
-               (keyup.enter)="
-        listState.state === 'success' &&
-          addTask(taskInput.value, listState.results);
-        taskInput.value = ''
-      " />
+               (keyup.enter)="listState.state === 'success' && addTask(taskInput.value, listState.results); taskInput.value = ''" />
+
         <button class="bg-slate-500 w-8 h-8 rounded ml-2 text-white"
-                (click)="
-        listState.state === 'success' &&
-          addTask(taskInput.value, listState.results);
-        taskInput.value = ''
-      ">
+                (click)="listState.state === 'success' && addTask(taskInput.value, listState.results); taskInput.value = ''">
             +
         </button>
     </div>
 
     <div class="p-2"
          *ngIf="listState.state === 'success'">
+
         <button class="p-2 mt-2 flex justify-between w-full"
                 [ngClass]="task.done ? 'bg-lime-500/50' : 'bg-slate-500/25'"
-                *ngFor="let task of listState.results"
+                *ngFor="let task of visibleTasks"
                 (dblclick)="editTask(task.id)">
+
             <p [class.line-through]="task.done"
                *ngIf="!task.isEditMode">
                 {{ task.name }}
@@ -35,16 +30,14 @@
                 <input #taskEditInput
                        type="text"
                        [value]="task.name" />
+
                 <button class="bg-slate-500/25 p-1 ml-1 mr-1"
-                        (click)="
-            updateTask(task.id, { name: taskEditInput.value, done: task.done })
-          ">
+                        (click)="updateTask(task.id, { name: taskEditInput.value, done: task.done })">
                     apply
                 </button>
+
                 <button class="bg-slate-500/25 p-1"
-                        (click)="cancelUpdate(task.id)">
-                    X
-                </button>
+                        (click)="cancelUpdate(task.id)">X</button>
             </div>
 
             <div>

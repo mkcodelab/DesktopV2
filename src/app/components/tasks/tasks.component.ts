@@ -1,5 +1,5 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { TaskService, TaskUpdatePayload } from '../../services/tasks.service';
 import { TaskListState } from './list-state.type';
 import { CustomDatePipe } from '../../utils/custom-date.pipe';
@@ -17,13 +17,10 @@ export type Task = {
   standalone: true,
   imports: [NgFor, NgIf, NgClass, CustomDatePipe],
   templateUrl: './tasks.component.html',
-  // styleUrl: './tasks.component.scss',
 })
 export class TasksComponent implements OnInit {
-  // DI by inject
   private taskService = inject(TaskService);
-  // DI by constructor
-  // constructor(private taskService: TaskService) {}
+  private ref = inject(ChangeDetectorRef);
 
   listState: TaskListState<Task> = { state: 'idle' };
 
@@ -54,11 +51,7 @@ export class TasksComponent implements OnInit {
       );
 
       if (taskToEdit) {
-        if (to) {
-          taskToEdit.isEditMode = true;
-        } else {
-          taskToEdit.isEditMode = false;
-        }
+        taskToEdit.isEditMode = to;
       }
     }
   }
@@ -70,6 +63,7 @@ export class TasksComponent implements OnInit {
           state: 'success',
           results: tasks.concat(response),
         };
+        this.ref.detectChanges();
       },
       error: (err) => {
         alert(err.message);
@@ -84,23 +78,25 @@ export class TasksComponent implements OnInit {
         this.listState.results = this.listState.results.filter((task) => {
           return task.id !== taskId;
         });
+        this.ref.detectChanges();
       }
     });
   }
 
-  // FIX THIS
   updateTask(taskId: number, payload: TaskUpdatePayload) {
     this.taskService.update(taskId, payload).subscribe(() => {
       this.toggleTaskEdit(taskId, false);
-      setTimeout(() => {
-        this.getAll();
-        console.log('test', payload);
-      }, 200);
-      // if (this.listState.state === 'success') {
-      //   this.listState.results = this.listState.results.map((task)=>{
-      //     return task.id === taskId
-      //   })
-      // }
+
+      //   updating view
+      if (this.listState.state === 'success') {
+        const taskToChange = this.listState.results.find(
+          (task) => task.id === taskId
+        );
+        if (payload.name && taskToChange) {
+          taskToChange.name = payload.name;
+        }
+        this.ref.detectChanges();
+      }
     });
   }
 
@@ -120,5 +116,11 @@ export class TasksComponent implements OnInit {
         this.taskService.update(taskId, { done: taskToEdit.done }).subscribe();
       }
     }
+  }
+
+  get visibleTasks(): Task[] | [] {
+    if (this.listState.state === 'success') {
+      return this.listState.results;
+    } else return [];
   }
 }
