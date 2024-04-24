@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { Route1Component } from './components/router-components/route1/route1.component';
 import { ApodContainerComponent } from './components/router-components/apod-container/apod-container.component';
+import { ReactiveFormComponent } from './components/router-components/reactive-form-component/reactive-form.component';
 
 export const routes: Routes = [
   {
@@ -14,9 +15,9 @@ export const routes: Routes = [
     data: { title: 'APOD' },
   },
   {
-    path: 'route3',
-    component: Route1Component,
-    data: { title: 'route3 comp' },
+    path: 'reactive-form',
+    component: ReactiveFormComponent,
+    data: { title: 'reactive form' },
   },
   {
     path: 'route4',

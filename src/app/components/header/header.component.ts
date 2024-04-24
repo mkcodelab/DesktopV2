@@ -21,7 +21,7 @@ export class HeaderComponent {
   navItems: NavItem[] = [
     { name: 'route1', url: 'route1' },
     { name: 'APOD', url: 'apod' },
-    { name: 'route3', url: 'route3' },
+    { name: 'reactive form', url: 'reactive-form' },
     { name: 'route4', url: 'route4' },
   ];
 

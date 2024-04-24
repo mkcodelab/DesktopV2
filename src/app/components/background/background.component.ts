@@ -6,7 +6,7 @@ import { CheckRender } from '../../decorators/check-render.decorator';
   standalone: true,
   selector: 'background',
   template: `<img
-      class="h-full w-full absolute z-0"
+      class="h-full w-full absolute -z-10"
       [src]="'https://picsum.photos/id/' + this.id + '/1600/800'"
       alt="background"
     />
@@ -30,8 +30,6 @@ import { CheckRender } from '../../decorators/check-render.decorator';
 @CheckRender()
 // @CheckRender
 export class BackgroundComponent implements OnInit {
-
-
   localStorageService = inject(LocalStorageService);
 
   id = 0;
