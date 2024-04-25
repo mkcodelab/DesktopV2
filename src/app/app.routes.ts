@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Route1Component } from './components/router-components/route1/route1.component';
 import { ApodContainerComponent } from './components/router-components/apod-container/apod-container.component';
 import { ReactiveFormComponent } from './components/router-components/reactive-form-component/reactive-form.component';
+import { NasaImagesComponent } from './components/router-components/nasa-images/nasa-images.component';
 
 export const routes: Routes = [
   {
@@ -20,8 +21,8 @@ export const routes: Routes = [
     data: { title: 'reactive form' },
   },
   {
-    path: 'route4',
-    component: Route1Component,
-    data: { title: 'route4 comp' },
+    path: 'nasa-images',
+    component: NasaImagesComponent,
+    data: { title: 'NASA Images' },
   },
 ];

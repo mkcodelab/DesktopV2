@@ -22,7 +22,7 @@ export class HeaderComponent {
     { name: 'route1', url: 'route1' },
     { name: 'APOD', url: 'apod' },
     { name: 'reactive form', url: 'reactive-form' },
-    { name: 'route4', url: 'route4' },
+    { name: 'NASA Images', url: 'nasa-images' },
   ];
 
   openNavModal() {
