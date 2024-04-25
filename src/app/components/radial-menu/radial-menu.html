@@ -1,0 +1,10 @@
+<div>
+    <button class="p-2 bg-white rounded-full"
+            (click)="toggleRadialMenu()">
+        {{menuText}}
+    </button>
+    <div class="relative"
+         [hidden]="!isMenuOpen">
+        <ng-content></ng-content>
+    </div>
+</div>
