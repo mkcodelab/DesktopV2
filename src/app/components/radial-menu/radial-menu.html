@@ -1,9 +1,12 @@
-<div>
+<div class="relative">
     <button class="p-2 bg-white rounded-full"
+            [style.width.px]="buttonRadius"
+            [style.height.px]="buttonRadius"
             (click)="toggleRadialMenu()">
         {{menuText}}
     </button>
-    <div class="relative"
+    <div class="absolute bg-red-500 rounded-full"
+         style="top: 50%; left: 50%; transform: translate(-50%, -50%);"
          [hidden]="!isMenuOpen">
         <ng-content></ng-content>
     </div>

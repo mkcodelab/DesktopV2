@@ -13,7 +13,8 @@ import { NgFor } from '@angular/common';
       <radial-menu [radius]="100">
         <button
           #radialItem
-          class="bg-slate-500 text-white p-2 rounded-full"
+          class="bg-slate-500 hover:bg-cyan-200 text-white p-2 rounded-full"
+          style="width: 100px; height: 100px;"
           *ngFor="let item of radialItems"
         >
           {{ item }}
@@ -25,7 +26,7 @@ import { NgFor } from '@angular/common';
 export class Route1Component {
   title: string = '';
 
-  radialItems = ['item1', 'item2', 'item3', 'item4', 'item5'];
+  radialItems = ['i1', 'i2', 'i3', 'i4', 'i5'];
 
   activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   routeSubscription: Subscription;

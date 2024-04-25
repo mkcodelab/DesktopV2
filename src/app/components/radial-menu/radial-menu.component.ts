@@ -28,7 +28,8 @@ import { ElementRef, Renderer2 } from '@angular/core';
 })
 export class RadialMenuComponent implements AfterContentInit {
   @Input() radius: number = 40;
-  menuText = 'menu';
+  @Input() buttonRadius: number = 40;
+  menuText = 'O';
 
   isMenuOpen = false;
 
@@ -49,15 +50,15 @@ export class RadialMenuComponent implements AfterContentInit {
 
   circularDistribution() {
     const step = (2 * Math.PI) / this.children.length;
-    let angle = (-90 * Math.PI) / this.children.length;
+    let angle = (-180 * Math.PI) / this.children.length;
 
-    this.children.forEach((child, index) => {
+    this.children.forEach((child) => {
       const x = Math.round(this.radius * Math.cos(angle));
       const y = Math.round(this.radius * Math.sin(angle));
       const el = child.nativeElement;
 
       this.renderer.setStyle(el, 'position', 'absolute');
-      this.renderer.setStyle(el, 'transform', 'translateY(-100%)');
+      this.renderer.setStyle(el, 'transform', 'translate(-50%, -50%)');
       this.renderer.setStyle(el, 'top', x + 'px');
       this.renderer.setStyle(el, 'left', y + 'px');
       angle -= step;
