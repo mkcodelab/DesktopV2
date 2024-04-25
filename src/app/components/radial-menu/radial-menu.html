@@ -1,4 +1,10 @@
 <div class="relative">
+    <div *ngIf="hasBackdrop"
+         [hidden]="!isMenuOpen"
+         class="bg-cyan-800/50 absolute rounded-full -z-10 border-4"
+         style="top: 50%; left: 50%; transform: translate(-50%, -50%);"
+         [style.width.px]="radius * 2"
+         [style.height.px]="radius * 2"></div>
     <button class="p-2 bg-white rounded-full"
             [style.width.px]="buttonRadius"
             [style.height.px]="buttonRadius"

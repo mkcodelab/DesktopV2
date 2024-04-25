@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   AfterContentInit,
   Component,
@@ -24,11 +25,12 @@ import { ElementRef, Renderer2 } from '@angular/core';
   standalone: true,
   selector: 'radial-menu',
   templateUrl: './radial-menu.html',
-  imports: [],
+  imports: [NgIf],
 })
 export class RadialMenuComponent implements AfterContentInit {
   @Input() radius: number = 40;
   @Input() buttonRadius: number = 40;
+  @Input() hasBackdrop = false;
   menuText = 'O';
 
   isMenuOpen = false;
@@ -50,7 +52,9 @@ export class RadialMenuComponent implements AfterContentInit {
 
   circularDistribution() {
     const step = (2 * Math.PI) / this.children.length;
-    let angle = (-180 * Math.PI) / this.children.length;
+    // to rotate items around
+    // let angle = ( x * Math.PI) / this.children.length;
+    let angle = Math.PI;
 
     this.children.forEach((child) => {
       const x = Math.round(this.radius * Math.cos(angle));
