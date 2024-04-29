@@ -1,9 +1,10 @@
+import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
   standalone: true,
   selector: 'image-card',
-  imports: [],
+  imports: [NgIf],
   templateUrl: './image-card.html',
 })
 export class ImageCardComponent {

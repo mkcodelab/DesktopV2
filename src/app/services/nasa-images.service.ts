@@ -28,8 +28,4 @@ export class NasaImagesService {
   getData(params: string): Observable<NasaResponse> {
     return this.http.get<NasaResponse>(this.baseUrl + params);
   }
-
-  //   getImages() {
-  //     return this.http.get(this.baseUrl + params)
-  //   }
 }

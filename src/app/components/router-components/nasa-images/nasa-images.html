@@ -21,7 +21,12 @@
     </div>
 
 </div>
-<div class="grid-rows-4 max-h-30 overflow-y-scroll">
-    <image-card *ngFor="let card of cards"
-                [imageUrl]="card.links[0].href"></image-card>
+<div class="overflow-y-auto m-10"
+     [style.height]="100 + '%'">
+    <div class="grid grid-cols-4 gap-1">
+        <image-card class="bg-white/50 rounded-xl"
+                    *ngFor="let card of cards"
+                    [imageUrl]="card.links ? card.links[0].href : ''"></image-card>
+    </div>
+
 </div>
