@@ -12,13 +12,16 @@ export class ApodContainerComponent {
   data: ApodObject;
   apodSvc = inject(APODService);
 
+  hdImage: string | undefined;
+
   showLightbox = false;
 
   ngOnInit() {
     this.apodSvc.getData().subscribe((data) => {
       this.data = data;
-      console.log(data);
     });
+
+    this.getHDImage();
   }
 
   get imageUrl() {
@@ -34,7 +37,13 @@ export class ApodContainerComponent {
   }
 
   get hdImageUrl() {
-    return this.data?.hdurl;
+    return this.hdImage;
+  }
+
+  getHDImage() {
+    return this.apodSvc.getHDPicture().subscribe((image) => {
+      this.hdImage = image;
+    });
   }
 
   get apodDate() {

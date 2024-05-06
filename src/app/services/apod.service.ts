@@ -2,7 +2,7 @@
 
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export interface ApodObject {
@@ -22,9 +22,17 @@ export class APODService {
 
   url = 'https://api.nasa.gov/planetary/apod';
 
+  apiParams = new HttpParams().set('api_key', this.api_key);
+
   http = inject(HttpClient);
   getData(): Observable<ApodObject> {
-    let apiParams = new HttpParams().set('api_key', this.api_key);
-    return this.http.get<ApodObject>(this.url, { params: apiParams });
+    // let apiParams = new HttpParams().set('api_key', this.api_key);
+    return this.http.get<ApodObject>(this.url, { params: this.apiParams });
+  }
+
+  getHDPicture(): Observable<string> {
+    return this.http
+      .get<ApodObject>(this.url, { params: this.apiParams })
+      .pipe(map((obj) => obj.hdurl));
   }
 }
