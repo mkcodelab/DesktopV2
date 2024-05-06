@@ -3,6 +3,7 @@ import { Route1Component } from './components/router-components/route1/route1.co
 import { ApodContainerComponent } from './components/router-components/apod-container/apod-container.component';
 import { ReactiveFormComponent } from './components/router-components/reactive-form-component/reactive-form.component';
 import { NasaImagesComponent } from './components/router-components/nasa-images/nasa-images.component';
+import { ApodResolverFn } from './components/router-components/apod-container/apod.resolver';
 
 export const routes: Routes = [
   {
@@ -14,6 +15,7 @@ export const routes: Routes = [
     path: 'apod',
     component: ApodContainerComponent,
     data: { title: 'APOD' },
+    resolve: { apodObject: ApodResolverFn },
   },
   {
     path: 'reactive-form',

@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { APODService, ApodObject } from '../../../services/apod.service';
 import { NgIf } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'apod-container',
@@ -12,13 +13,19 @@ export class ApodContainerComponent {
   data: ApodObject;
   apodSvc = inject(APODService);
 
+  activatedRoute = inject(ActivatedRoute);
+
   hdImage: string | undefined;
 
   showLightbox = false;
 
   ngOnInit() {
-    this.apodSvc.getData().subscribe((data) => {
-      this.data = data;
+    // this.apodSvc.getData().subscribe((data) => {
+    //   this.data = data;
+    // });
+    // data from resolver function
+    this.activatedRoute.data.subscribe(({ apodObject }) => {
+      this.data = apodObject;
     });
 
     this.getHDImage();
@@ -52,5 +59,9 @@ export class ApodContainerComponent {
 
   get title() {
     return this.data?.title;
+  }
+
+  get mediaType() {
+    return this.data?.media_type;
   }
 }
