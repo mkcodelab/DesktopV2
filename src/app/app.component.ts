@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CentralModalComponent } from './components/central-modal/central-modal.component';
 import { CentralBottomPanelComponent } from './components/central-bottom-panel/central-bottom-panel.component';
@@ -15,6 +15,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { TabsContainerComponent } from './components/tab/tabs-container.component';
 import { TabComponent } from './components/tab/tab.component';
 import { ModalContainerComponent } from './components/modal-container/modal-container.component';
+import { ExternalScriptService } from './services/externalScript.service';
 
 @Component({
   selector: 'app-root',
@@ -42,6 +43,7 @@ import { ModalContainerComponent } from './components/modal-container/modal-cont
   providers: [HttpClient],
 })
 export class AppComponent {
+  ytApiUrl = 'https://www.youtube.com/iframe_api';
   title = 'desktopV2';
 
   protected navOpened = false;
@@ -49,6 +51,8 @@ export class AppComponent {
 
   //   move it to movableWindowComponent / service
   protected movableWindowOpened = false;
+
+  extScriptSvc = inject(ExternalScriptService);
 
   openMovableWindow(windowName: string) {
     switch (windowName) {
@@ -74,5 +78,10 @@ export class AppComponent {
 
   get openedNav(): boolean {
     return this.navOpened;
+  }
+
+  ngOnInit() {
+    // yt video api script
+    this.extScriptSvc.injectScript(this.ytApiUrl);
   }
 }

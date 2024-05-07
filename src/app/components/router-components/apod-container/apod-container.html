@@ -10,15 +10,16 @@
                 <h2 class="text-lg text-white mb-4">{{title}}</h2>
 
                 <img *ngIf="mediaType === 'image'"
-                     [src]="imageUrl"
+                     [src]="contentUrl"
                      class="max-h-80 object-cover cursor-pointer"
                      alt="APOD"
                      (click)="enlarge()">
 
                 <div *ngIf="mediaType === 'video'"
                      class="flex flex-column">
-                    <p>click the link below to see full video:</p>
-                    <a [href]="imageUrl">{{imageUrl}}</a>
+                    <!-- <p>click the link below to see full video:</p>
+                    <a [href]="contentUrl">{{contentUrl}}</a> -->
+                    <yt-player [src]="contentUrl"></yt-player>
                 </div>
 
                 <p class="text-white mt-4">{{description}}</p>
