@@ -38,4 +38,8 @@ export class RxjsRandomApiService {
       this.randomDish$,
     ]);
   }
+
+  getDataFromEndpoint(endpoint: string) {
+    return this.http.get(`${this.endpoint}${endpoint}/random_${endpoint}`);
+  }
 }

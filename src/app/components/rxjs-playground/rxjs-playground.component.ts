@@ -1,5 +1,23 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { first, Observable, Observer, Subscription } from 'rxjs';
+import {
+  Component,
+  ElementRef,
+  inject,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import {
+  catchError,
+  concatMap,
+  EMPTY,
+  fromEvent,
+  map,
+  Observable,
+  Observer,
+  of,
+  Subscription,
+  tap,
+} from 'rxjs';
 import { RxjsDataService } from './rxjs-data.service';
 import { RxjsRandomApiService } from './rxjs-random-api.service';
 
@@ -56,6 +74,13 @@ export class RxjsPlaygroundComponent implements OnInit, OnDestroy {
 
   customOfTest = this.customOf('a', 'b', 'c');
 
+  @ViewChild('endpointInput')
+  endpointInputElement: ElementRef;
+
+  @ViewChild('fetchButton') fetchButtonElement: ElementRef;
+
+  fetchButtonClick$: Observable<Object>;
+
   ngOnInit() {
     // console.log('before subscription');
     // this.observableSubscription = this.observable$.subscribe(this.observer);
@@ -80,6 +105,34 @@ export class RxjsPlaygroundComponent implements OnInit, OnDestroy {
       });
   }
 
+  ngAfterViewInit() {
+    //   console.log('input: ', this.endpointInputElement.nativeElement);
+    //   console.log('input value:', this.endpointInputElement.nativeElement.value);
+    this.fetchButtonClick$ = fromEvent(
+      this.fetchButtonElement.nativeElement,
+      'click'
+    ).pipe(
+      tap(() => console.log('clicked event fired')),
+      map(() => this.endpointInputElement.nativeElement.value),
+      tap((value) => console.log(value)),
+      concatMap((value) =>
+        this.rxjsRandomApiSvc
+          .getDataFromEndpoint(value)
+          //   if error occures, it completes the inner observable but outer is still subscribed
+          .pipe(
+            catchError((error) => of(`Could not fetch data: ${error.message}`))
+          )
+      )
+      //   catchError(() => EMPTY)
+    );
+
+    this.fetchButtonClick$.subscribe({
+      next: (value) => console.log(value),
+      error: (err) => console.log(err),
+      complete: () => console.log('completed'),
+    });
+  }
+
   customOf(...args: string[]): Observable<string> {
     return new Observable<string>((subscriber) => {
       for (let arg of args) {
@@ -87,6 +140,10 @@ export class RxjsPlaygroundComponent implements OnInit, OnDestroy {
       }
       subscriber.complete();
     });
+  }
+
+  onFetchButtonClicked() {
+    console.log('input value', this.endpointInputElement.nativeElement.value);
   }
 
   ngOnDestroy() {
