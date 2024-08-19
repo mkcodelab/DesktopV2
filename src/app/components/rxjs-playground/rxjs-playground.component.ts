@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Observer, Subscription, timeout } from 'rxjs';
 
 @Component({
@@ -6,7 +6,7 @@ import { Observable, Observer, Subscription, timeout } from 'rxjs';
   selector: 'rxjs-playground',
   templateUrl: './rxjs-playground.component.html',
 })
-export class RxjsPlaygroundComponent {
+export class RxjsPlaygroundComponent implements OnInit, OnDestroy {
   observable$ = new Observable<any>((subscriber) => {
     console.log('observable executed');
     subscriber.next('alice');
@@ -46,12 +46,13 @@ export class RxjsPlaygroundComponent {
   });
 
   intervalSubscription: Subscription;
+  observableSubscription: Subscription;
 
   customOfTest = this.customOf('a', 'b', 'c');
 
   ngOnInit() {
     console.log('before subscription');
-    this.observable$.subscribe(this.observer);
+    this.observableSubscription = this.observable$.subscribe(this.observer);
     console.log('after subscription');
 
     this.intervalSubscription = this.intervalObservable$.subscribe((value) => {
@@ -72,5 +73,10 @@ export class RxjsPlaygroundComponent {
       }
       subscriber.complete();
     });
+  }
+
+  ngOnDestroy() {
+    this.intervalSubscription.unsubscribe();
+    this.observableSubscription.unsubscribe();
   }
 }
