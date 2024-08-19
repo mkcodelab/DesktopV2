@@ -1,6 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Observer, Subscription } from 'rxjs';
+import { first, Observable, Observer, Subscription } from 'rxjs';
 import { RxjsDataService } from './rxjs-data.service';
+import { RxjsRandomApiService } from './rxjs-random-api.service';
 
 @Component({
   standalone: true,
@@ -9,6 +10,8 @@ import { RxjsDataService } from './rxjs-data.service';
 })
 export class RxjsPlaygroundComponent implements OnInit, OnDestroy {
   rxjsDataSvc = inject(RxjsDataService);
+
+  rxjsRandomApiSvc = inject(RxjsRandomApiService);
 
   observable$ = new Observable<any>((subscriber) => {
     console.log('observable executed');
@@ -54,21 +57,27 @@ export class RxjsPlaygroundComponent implements OnInit, OnDestroy {
   customOfTest = this.customOf('a', 'b', 'c');
 
   ngOnInit() {
-    console.log('before subscription');
-    this.observableSubscription = this.observable$.subscribe(this.observer);
-    console.log('after subscription');
+    // console.log('before subscription');
+    // this.observableSubscription = this.observable$.subscribe(this.observer);
+    // console.log('after subscription');
 
-    this.intervalSubscription = this.intervalObservable$.subscribe((value) => {
-      console.log(value);
-    });
+    // this.intervalSubscription = this.intervalObservable$.subscribe((value) => {
+    //   console.log(value);
+    // });
 
-    setTimeout(() => {
-      this.intervalSubscription.unsubscribe();
-    }, 7000);
+    // setTimeout(() => {
+    //   this.intervalSubscription.unsubscribe();
+    // }, 7000);
 
     // this.customOfTest.subscribe(console.log);
 
     this.rxjsDataSvc.getFeed('Sports').subscribe(console.log);
+
+    this.rxjsRandomApiSvc
+      .getJoinedData()
+      .subscribe(([firstName, capital, dish]) => {
+        console.log(`${firstName} is from ${capital} and likes to eat ${dish}`);
+      });
   }
 
   customOf(...args: string[]): Observable<string> {
@@ -81,7 +90,7 @@ export class RxjsPlaygroundComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.intervalSubscription.unsubscribe();
-    this.observableSubscription.unsubscribe();
+    // this.intervalSubscription.unsubscribe();
+    // this.observableSubscription.unsubscribe();
   }
 }
