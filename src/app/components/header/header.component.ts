@@ -23,6 +23,7 @@ export class HeaderComponent {
     { name: 'APOD', url: 'apod' },
     { name: 'reactive form', url: 'reactive-form' },
     { name: 'NASA Images', url: 'nasa-images' },
+    { name: 'RxJs playground', url: 'rxjs-playground' },
   ];
 
   openNavModal() {

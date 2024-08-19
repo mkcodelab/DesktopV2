@@ -4,6 +4,7 @@ import { ApodContainerComponent } from './components/router-components/apod-cont
 import { ReactiveFormComponent } from './components/router-components/reactive-form-component/reactive-form.component';
 import { NasaImagesComponent } from './components/router-components/nasa-images/nasa-images.component';
 import { ApodResolverFn } from './components/router-components/apod-container/apod.resolver';
+import { RxjsPlaygroundComponent } from './components/rxjs-playground/rxjs-playground.component';
 
 export const routes: Routes = [
   {
@@ -26,5 +27,10 @@ export const routes: Routes = [
     path: 'nasa-images',
     component: NasaImagesComponent,
     data: { title: 'NASA Images' },
+  },
+  {
+    path: 'rxjs-playground',
+    component: RxjsPlaygroundComponent,
+    data: { title: 'RxJs Playground' },
   },
 ];
