@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Observer, Subscription, timeout } from 'rxjs';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Observer, Subscription } from 'rxjs';
+import { RxjsDataService } from './rxjs-data.service';
 
 @Component({
   standalone: true,
@@ -7,6 +8,8 @@ import { Observable, Observer, Subscription, timeout } from 'rxjs';
   templateUrl: './rxjs-playground.component.html',
 })
 export class RxjsPlaygroundComponent implements OnInit, OnDestroy {
+  rxjsDataSvc = inject(RxjsDataService);
+
   observable$ = new Observable<any>((subscriber) => {
     console.log('observable executed');
     subscriber.next('alice');
@@ -64,6 +67,8 @@ export class RxjsPlaygroundComponent implements OnInit, OnDestroy {
     }, 7000);
 
     // this.customOfTest.subscribe(console.log);
+
+    this.rxjsDataSvc.getFeed('Sports').subscribe(console.log);
   }
 
   customOf(...args: string[]): Observable<string> {
